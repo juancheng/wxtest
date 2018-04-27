@@ -1,16 +1,20 @@
 package com.hym.wxtest.service;
 
+import com.hym.wxtest.dto.BaseResult;
 import com.hym.wxtest.entity.Area;
-
-import java.util.List;
+import com.hym.wxtest.exception.AreaException;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * 与Area相关的service接口
  */
 public interface AreaService {
-    List<Area> listArea();
-    Area findAreaById(Integer areaId);
-    int saveArea(Area area);
-    int updateArea(Area area);
-    int deleteArea(Integer areaId);
+    BaseResult listArea();
+    BaseResult findAreaById(Integer areaId);
+    @Transactional
+    BaseResult saveArea(Area area) throws AreaException;
+    @Transactional
+    BaseResult updateArea(Area area) throws AreaException;
+    @Transactional
+    BaseResult deleteArea(Integer areaId) throws AreaException;
 }

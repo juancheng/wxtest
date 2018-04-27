@@ -1,7 +1,11 @@
 package com.hym.wxtest.service.impl;
 
 import com.hym.wxtest.dao.AreaDao;
+import com.hym.wxtest.dto.AreaResult;
+import com.hym.wxtest.dto.BaseResult;
 import com.hym.wxtest.entity.Area;
+import com.hym.wxtest.enums.AreaEnum;
+import com.hym.wxtest.exception.AreaException;
 import com.hym.wxtest.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,27 +19,52 @@ public class AreaServiceImpl implements AreaService {
     private AreaDao areaDao;
 
     @Override
-    public List<Area> listArea() {
-        return areaDao.queryArea();
+    public BaseResult listArea() throws AreaException {
+        List<Area> areas = areaDao.queryArea();
+        if (areas.size() > 0) {
+            return new AreaResult<>(AreaEnum.SUCCESS, areas);
+        }else {
+            return new AreaResult(AreaEnum.FIND_DATA_NONE);
+        }
     }
 
     @Override
-    public Area findAreaById(Integer areaId) {
-        return areaDao.queryAreaById(areaId);
+    public BaseResult findAreaById(Integer areaId) throws AreaException {
+        Area area = areaDao.queryAreaById(areaId);
+        if (area != null) {
+            return new AreaResult<>(AreaEnum.SUCCESS, area);
+        } else {
+            return new AreaResult(AreaEnum.MATCH_DATA_NONE);
+        }
     }
 
     @Override
-    public int saveArea(Area area) {
-        return areaDao.insertArea(area);
+    public BaseResult saveArea(Area area) throws AreaException {
+        int influenceNum = areaDao.insertArea(area);
+        if (influenceNum >= 1) {
+            return new AreaResult<>(AreaEnum.SUCCESS_SAVE, area);
+        }else {
+            throw new AreaException(AreaEnum.FAIL_SAVE);
+        }
     }
 
     @Override
-    public int updateArea(Area area) {
-        return areaDao.updateArea(area);
+    public BaseResult updateArea(Area area) throws AreaException {
+        int influenceNum = areaDao.updateArea(area);
+        if (influenceNum >= 1) {
+            return new AreaResult(AreaEnum.SUCCESS_UPDATE, area);
+        } else {
+            throw new AreaException(AreaEnum.FAIL_UPDATE);
+        }
     }
 
     @Override
-    public int deleteArea(Integer areaId) {
-        return areaDao.deleteArea(areaId);
+    public BaseResult deleteArea(Integer areaId) throws AreaException {
+        int influenceNum = areaDao.deleteArea(areaId);
+        if (influenceNum >= 1) {
+            return new AreaResult(AreaEnum.SUCCESS_DELETE);
+        } else {
+            throw new AreaException(AreaEnum.FAIL_DELETE);
+        }
     }
 }
