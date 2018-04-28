@@ -25,39 +25,33 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(value = {ConstraintViolationException.class})
     public GlobalExceptionResult handleConstraintViolationException(Exception e, HttpServletRequest request) {
-        GlobalExceptionResult globalExceptionResult = new GlobalExceptionResult(HttpStatus.BAD_REQUEST.value(), e.getMessage());
-        return globalExceptionResult;
+        return new GlobalExceptionResult(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
     @ExceptionHandler(value = {MethodArgumentNotValidException.class})
     public GlobalExceptionResult handleMethodArgumentNotValidException(Exception e, HttpServletRequest request) {
-        GlobalExceptionResult globalExceptionResult = new GlobalExceptionResult(HttpStatus.BAD_REQUEST.value(), e.getMessage());
-        return globalExceptionResult;
+        return new GlobalExceptionResult(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
 
     @ExceptionHandler(value = {IllegalArgumentException.class})
     public GlobalExceptionResult handleIllegalArgumentException(Exception e, HttpServletRequest request) {
-        GlobalExceptionResult globalExceptionResult = new GlobalExceptionResult(HttpStatus.BAD_REQUEST.value(), e.getMessage());
-        return globalExceptionResult;
+        return new GlobalExceptionResult(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
     @ExceptionHandler(value = {MethodArgumentTypeMismatchException.class})
     public GlobalExceptionResult handleMethodArgumentTypeMismatchException(Exception e, HttpServletRequest request) {
-        GlobalExceptionResult globalExceptionResult = new GlobalExceptionResult(HttpStatus.BAD_REQUEST.value(), e.getMessage());
-        return globalExceptionResult;
+        return new GlobalExceptionResult(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
     @ExceptionHandler(value = { NoHandlerFoundException.class })
     public GlobalExceptionResult noHandlerFoundException(Exception e, HttpServletRequest request) {
-        GlobalExceptionResult globalExceptionResult = new GlobalExceptionResult(HttpStatus.NOT_FOUND.value(), e.getMessage());
-        return globalExceptionResult;
+        return new GlobalExceptionResult(HttpStatus.NOT_FOUND.value(), e.getMessage());
     }
 
     @ExceptionHandler(value = { Exception.class })
     public GlobalExceptionResult unknownException(Exception e, HttpServletRequest request) {
-        GlobalExceptionResult globalExceptionResult = new GlobalExceptionResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), e.getMessage());
-        return globalExceptionResult;
+        return new GlobalExceptionResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), e);
     }
 
 }

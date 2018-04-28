@@ -7,8 +7,10 @@ import com.hym.wxtest.entity.Area;
 import com.hym.wxtest.enums.AreaEnum;
 import com.hym.wxtest.exception.AreaException;
 import com.hym.wxtest.service.AreaService;
+import com.hym.wxtest.utils.OssClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -19,7 +21,7 @@ public class AreaServiceImpl implements AreaService {
     private AreaDao areaDao;
 
     @Override
-    public BaseResult listArea() throws AreaException {
+    public BaseResult listArea() {
         List<Area> areas = areaDao.queryArea();
         if (areas.size() > 0) {
             return new AreaResult<>(AreaEnum.SUCCESS, areas);
@@ -29,7 +31,7 @@ public class AreaServiceImpl implements AreaService {
     }
 
     @Override
-    public BaseResult findAreaById(Integer areaId) throws AreaException {
+    public BaseResult findAreaById(Integer areaId) {
         Area area = areaDao.queryAreaById(areaId);
         if (area != null) {
             return new AreaResult<>(AreaEnum.SUCCESS, area);
@@ -65,6 +67,17 @@ public class AreaServiceImpl implements AreaService {
             return new AreaResult(AreaEnum.SUCCESS_DELETE);
         } else {
             throw new AreaException(AreaEnum.FAIL_DELETE);
+        }
+    }
+
+    @Override
+    public BaseResult uploadFiles(MultipartFile file) throws AreaException {
+        try {
+            String fileUrl = OssClientUtil.uploadFile(file);
+            return new AreaResult(AreaEnum.SUCCESS, fileUrl);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new AreaException(AreaEnum.FIND_DATA_NONE);
         }
     }
 }

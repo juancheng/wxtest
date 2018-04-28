@@ -7,6 +7,7 @@ import com.hym.wxtest.exception.AreaException;
 import com.hym.wxtest.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 @RestController
 @RequestMapping("/area")
@@ -47,6 +48,15 @@ public class AreaController {
     public BaseResult deleteArea(@PathVariable("areaId") Integer areaId) {
         try {
             return areaService.deleteArea(areaId);
+        } catch (AreaException e) {
+            return new AreaResult(e);
+        }
+    }
+
+    @PostMapping("/upload")
+    public BaseResult uploadFiles(@RequestParam("file")MultipartFile file) {
+        try {
+            return areaService.uploadFiles(file);
         } catch (AreaException e) {
             return new AreaResult(e);
         }

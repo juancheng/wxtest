@@ -18,7 +18,4 @@ public class AreaException extends RuntimeException {
         return code;
     }
 
-    public void setCode(Integer code) {
-        this.code = code;
-    }
 }

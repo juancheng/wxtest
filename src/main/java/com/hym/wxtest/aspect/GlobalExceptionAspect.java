@@ -28,22 +28,20 @@ public class GlobalExceptionAspect {
     public void doBefore(JoinPoint joinPoint){
         ServletRequestAttributes sra = (ServletRequestAttributes) RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = sra.getRequest();
-        logger.info("doBefore--GlobalExceptionHandler");
+        logger.error("doBefore--GlobalExceptionHandler");
         //url
-        logger.info("url={}",request.getRequestURL());
-        //ip
-        logger.info("ip={}",request.getRemoteAddr());
+        logger.error("ip={}",request.getRemoteAddr());
         //method
-        logger.info("method={}",request.getMethod());
+        logger.error("method={}",request.getMethod());
         //类方法
-        logger.info("class_method={}",joinPoint.getSignature().getDeclaringType()+"."+joinPoint.getSignature().getName());
+        logger.error("class_method={}",joinPoint.getSignature().getDeclaringType()+"."+joinPoint.getSignature().getName());
         //方法参数
-        logger.info("args={}",joinPoint.getArgs());
+        logger.error("args={}",joinPoint.getArgs());
     }
 
     @AfterReturning(pointcut = "log()",returning = "object")
     public void doAfterReturning(Object object){
-        logger.info("global_exception_response={}",object);
+        logger.error("global_exception_response={}",object);
     }
 
 }
