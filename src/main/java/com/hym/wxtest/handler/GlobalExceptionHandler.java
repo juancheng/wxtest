@@ -33,7 +33,6 @@ public class GlobalExceptionHandler {
         return new GlobalExceptionResult(HttpStatus.BAD_REQUEST.value(), e.getMessage());
     }
 
-
     @ExceptionHandler(value = {IllegalArgumentException.class})
     public GlobalExceptionResult handleIllegalArgumentException(Exception e, HttpServletRequest request) {
         return new GlobalExceptionResult(HttpStatus.BAD_REQUEST.value(), e.getMessage());
@@ -53,5 +52,4 @@ public class GlobalExceptionHandler {
     public GlobalExceptionResult unknownException(Exception e, HttpServletRequest request) {
         return new GlobalExceptionResult(HttpStatus.INTERNAL_SERVER_ERROR.value(), e);
     }
-
 }

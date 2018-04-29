@@ -6,6 +6,7 @@ import com.hym.wxtest.entity.Area;
 import com.hym.wxtest.exception.AreaException;
 import com.hym.wxtest.service.AreaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -27,7 +28,7 @@ public class AreaController {
     }
 
     @PostMapping("/save")
-    public BaseResult saveArea(@RequestBody Area area) {
+    public BaseResult saveArea(@Validated @RequestBody Area area) {
         try {
            return areaService.saveArea(area);
         } catch (AreaException e) {
@@ -36,7 +37,7 @@ public class AreaController {
     }
 
     @PutMapping("/update")
-    public BaseResult updateArea(@RequestBody Area area) {
+    public BaseResult updateArea(@Validated @RequestBody Area area) {
         try {
             return areaService.updateArea(area);
         } catch (AreaException e) {

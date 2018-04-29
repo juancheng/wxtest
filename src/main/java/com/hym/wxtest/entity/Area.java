@@ -1,5 +1,7 @@
 package com.hym.wxtest.entity;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 /**
@@ -7,7 +9,9 @@ import java.util.Date;
  */
 public class Area {
     private Integer areaId; // 区域id
+    @NotBlank(message = "区域名称不能为空")
     private String areaName;// 区域名称
+    @NotNull(message = "优先级不能为空")
     private Integer priority;// 优先级
     private Date createTime;
     private Date lastEditTime;
