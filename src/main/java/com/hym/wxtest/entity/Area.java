@@ -2,12 +2,14 @@ package com.hym.wxtest.entity;
 
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
  * 区域信息实体类
  */
-public class Area {
+public class Area implements Serializable{
+
     private Integer areaId; // 区域id
     @NotBlank(message = "区域名称不能为空")
     private String areaName;// 区域名称

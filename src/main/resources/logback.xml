@@ -37,6 +37,7 @@
             <MaxFileSize>10MB</MaxFileSize>
         </triggeringPolicy>
     </appender>
+    <logger name="com.hym.wxtest.dao" level="DEBUG"></logger>
     <!-- 4.设置日志文件的输出级别 TRACE DEBUG INFO WARN ERROR -->
     <root level="INFO">
         <appender-ref ref="STDOUT"/>

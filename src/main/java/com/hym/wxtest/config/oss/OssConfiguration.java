@@ -1,4 +1,4 @@
-package com.hym.wxtest.config.utils;
+package com.hym.wxtest.config.oss;
 
 import com.aliyun.oss.OSSClient;
 import org.springframework.beans.factory.annotation.Value;
